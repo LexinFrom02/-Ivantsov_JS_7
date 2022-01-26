@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.0/dist/js.cookie.min.js"></script>
+    <title>Ivantsov_JS_7.4</title>
+</head>
+<!--При загрузке страницы вызывается метод getCookies исходный код метода будет рассмотрен
+ниже-->
+
+<body onload="getCookies()">
+    <div>
+
+        <label>
+            Логин:<br>
+            <input type="text" placeholder="Введите логин" id="login">
+        </label><br>
+        <label>
+            Пароль:<br>
+            <input type="text" placeholder="Введите пароль" id="password">
+        </label>
+        <button class="logIn" onclick="login()">Войти</button>
+    </div>
+
+    <p class="saveCookie"></p>
+
+    <script src="scripts/script.js"></script>
+</body>
+
+</html>

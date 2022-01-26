@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ivantsov_JS_7.3</title>
+</head>
+
+<body>
+    <script>
+        {
+            "use strict";
+
+            let currentCookies = [
+                { name: 'login', value: 'Aleksey' },
+                { name: 'password', value: 'qwerty' },
+                { name: 'domain', value: 'localhost' },
+                { name: '_ym_isad', value: '2' },
+                { name: '_ym_visorc', value: 'w' }
+            ];
+
+            // currentCookies.forEach(function (item) {
+            //     document.cookie = encodeURIComponent(item.name) + '=' + encodeURIComponent(item.value);
+            // })
+
+            // Насколько я понимаю, такой вид предпочтительнее? Или это зависит от каждой конкретной ситуаации?
+            currentCookies.forEach(item => {
+                document.cookie = encodeURIComponent(item.name) + '=' + encodeURIComponent(item.value);
+            });
+
+            getCookies = () => {
+                let finalObj = [];
+                let splitedCookies = document.cookie.split('; ');
+                splitedCookies.forEach(item => {
+                    let splitedCookiesValues = item.split('=');
+                    finalObj.push({ name: splitedCookiesValues[0], value: splitedCookiesValues[1]});
+                });
+                return finalObj;
+            }
+
+            console.log(getCookies());
+        }
+    </script>
+</body>
+
+</html>

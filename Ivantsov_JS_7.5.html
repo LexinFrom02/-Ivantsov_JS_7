@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.0/dist/js.cookie.min.js"></script>
+    <title>Ivantsov_JS_7.5</title>
+    <style>
+        .formAuth,
+        .greetings {
+            padding: 16px;
+        }
+
+        .formAuth label {
+            font-size: 18px;
+        }
+
+        .formAuth input[type="text"] {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .formAuth button {
+            font-size: 16px;
+            padding: 7px 10px;
+        }
+    </style>
+    <script>
+            let login = () => {
+                let username = document.getElementById('login').value;
+                let password = document.getElementById('password').value;
+                if (username == 'admin' && password == 'admin') {
+                    Cookies.set('login', username);
+                    Cookies.set('password', password);
+                    checkStatus();
+                } else {
+                    document.getElementsByClassName('info')[0].innerHTML = '<strong>По всему видно, Вы - не админ! Проваливайте!</strong > ';
+                }
+            }
+
+            let logout = async () => {
+                Cookies.remove('login');
+                Cookies.remove('password');
+                checkStatus();
+            }
+
+            let checkStatus = () => {
+                let login = Cookies.get('login');
+                let pass = Cookies.get('password');
+                if (login == 'admin' && pass == 'admin') {
+                    document.getElementsByClassName('formAuth')[0].style.display = 'none';
+                    document.getElementsByClassName('greetings')[0].style.display = 'block';
+                    document.querySelector('.greetings p span').innerText = login;
+                } else {
+                    document.getElementsByClassName('formAuth')[0].style.display = 'block';
+                    document.getElementsByClassName('greetings')[0].style.display = 'none';
+                }
+                document.getElementsByClassName('info')[0].innerHTML = '';
+                document.getElementById('login').value = '';
+                document.getElementById('password').value = '';
+            }
+            window.onload = checkStatus;
+    </script>
+</head>
+
+<body>
+    <div class="greetings" style="display: none;">
+        <p>Добро пожаловать, <span></span>!</p>
+        <button class="logOut" onclick="logout()">Выйти</button>
+    </div>
+    <div class="formAuth" style="display: block;">
+        <label>
+            Логин:<br>
+            <input type="text" placeholder="Введите логин" id="login">
+        </label><br>
+        <label>
+            Пароль:<br>
+            <input type="text" placeholder="Введите пароль" id="password">
+        </label><br>
+        <button class="logIn" onclick="login()">Войти</button>
+        <p class="info"></p>
+    </div>
+    <p class="saveCookie"></p>
+</body>
+
+</html>
